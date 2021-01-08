@@ -54,6 +54,11 @@ a {
   text-decoration: none;
 }
 
+.nav {
+  display: flex;
+  justify-content: space-between;
+}
+
 .nav li:first-child {
   padding-left: 0;
 }
@@ -66,10 +71,15 @@ li {
   list-style-type: none;
   padding: 10px;
   text-decoration: none;
+  line-height: 50px;
+}
+
+li span {
+  vertical-align: top;
 }
 
 .avatar {
-  height: 50px;
+  height: 25px;
   border-radius: 25px;
   margin: 10px;
 }
@@ -139,12 +149,70 @@ li {
   border: none;
 }
 
-.new-tweet {
+.login-form {
   width: 100%;
   max-width: 590px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  background: #2c3e50;
+  background-image: none;
+}
+
+/* Remove IE arrow */
+select::-ms-expand {
+  display: none;
+}
+
+/* Custom Select */
+.select {
+  display: flex;
+  height: 3em;
+  line-height: 3;
+  background: #2c3e50;
+  overflow: hidden;
+  border-radius: .25em;
+  width: 250px;
+  position: relative;
+  margin: 5px auto;
+  padding: 0;
+}
+
+select {
+  flex: 1;
+  padding: 0 .5em;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* Arrow */
+.select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 1em;
+  background: #34495e;
+  cursor: pointer;
+  pointer-events: none;
+  -webkit-transition: .25s all ease;
+  -o-transition: .25s all ease;
+  transition: .25s all ease;
+}
+
+/* Transition */
+.select:hover::after {
+  color: #f39c12;
 }
 
 .textarea {

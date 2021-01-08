@@ -1,8 +1,34 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleSetAuthedUser } from '../actions/authedUser'
+import { Redirect } from 'react-router-dom'
 
 class Login extends Component {
+  state = {
+    userId: ''
+  }
+
+  handleChange = (e) => {
+    const userId = e.target.value
+
+    this.setState(() => ({
+      userId
+    }))
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+
+    const { userId } = this.state
+    const { dispatch, id } = this.props
+
+    dispatch(handleSetAuthedUser(userId))
+
+    this.setState(() => ({
+      userId: '',
+      toHome: id ? false : true,
+    }))
+  }
 
   loginUser = (e) => {
     const { dispatch } = this.props;
@@ -10,23 +36,35 @@ class Login extends Component {
 
     e.preventDefault();
 
-    dispatch(handleSetAuthedUser(userId))
   }
 
   render() {
     const { users } = this.props
+    const { userId, toHome } = this.state
+
+    if (toHome) {
+      return <Redirect to='/' />
+    }
 
     return (
       <div className='center'>
         <h3>Login</h3>
-        <div className='user-list'>
-          <select defaultValue={'DEFAULT'} onChange={this.loginUser}>
-              <option value='DEFAULT' disabled>Select user</option>
-              {Object.keys(users).map(userId => (
-                  <option key={userId} value={userId}>{users[userId].name}</option>
-              ))}
-          </select>
-      </div>
+        <form className='login-form' onSubmit={this.handleSubmit}>
+          <div className='select'>
+            <select defaultValue='' onChange={this.handleChange}>
+                <option value='' disabled>Select user</option>
+                {Object.keys(users).map(id => (
+                    <option key={id} value={id}>{users[id].name}</option>
+                ))}
+            </select>
+          </div>
+          <button
+            className='btn'
+            type='submit'
+            disabled={userId === ''}>
+              Submit
+          </button>
+        </form>
       </div>
     )
   }

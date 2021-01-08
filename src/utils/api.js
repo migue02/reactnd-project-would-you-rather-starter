@@ -5,7 +5,7 @@ import {
   _saveQuestionAnswer,
 } from './_DATA.js'
 
-export function getInitialData () {
+export function getUsers () {
   return _getUsers()
 }
 
