@@ -1,29 +1,70 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleQuestionsData } from '../actions/shared'
+import Question from './Question'
 
 class Dashboard extends Component {
+  state = {
+    answered: false
+  }
+
+  switchQuestions = (e, answered) => {
+    e.preventDefault()
+
+    this.setState(() => ({
+      answered
+    }))
+  }
 
   componentDidMount() {
     this.props.dispatch(handleQuestionsData())
   }
 
   render() {
-    const { users, questions } = this.props
+    const { answered } = this.state
+    const { answeredQuestions, unansweredQuestions } = this.props
+    const questions = answered ? answeredQuestions : unansweredQuestions
 
-    console.log('users, questions', users, questions);
     return (
       <div className='center'>
-        <h3>Dashboard</h3>
+        <div className='tabs'>
+          <button
+            className={'tab ' + (answered ? '': 'selected')}
+            onClick={(e) => this.switchQuestions(e, false)}>
+              Unanswered Questions
+          </button>
+          <button
+            className={'tab ' + (answered ? 'selected': '')}
+            onClick={(e) => this.switchQuestions(e, true)}>
+              Answered Questions
+          </button>
+        </div>
+        {questions.map((question) => (
+          <li key={question.id}>
+            <Question id={question.id} ></Question>
+          </li>
+        ))}
       </div>
     )
   }
 }
 
-function mapStateToProps ({ users, questions }) {
+function mapStateToProps ({ questions, users, authedUser }) {
+  const user = users[authedUser]
+
+  const answeredQuestions = Object.keys(questions)
+    .filter(id => Object.keys(user.answers).includes(id))
+    .sort((a,b) => questions[b].timestamp - questions[a].timestamp)
+    .map((id) => questions[id])
+
+  const unansweredQuestions = Object.keys(questions)
+    .filter(id => !Object.keys(user.answers).includes(id))
+    .sort((a,b) => questions[b].timestamp - questions[a].timestamp)
+    .map((id) => questions[id])
+
   return {
-    users,
-    questions
+    answeredQuestions: answeredQuestions,
+    unansweredQuestions: unansweredQuestions,
   }
 }
 

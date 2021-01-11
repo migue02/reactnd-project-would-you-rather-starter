@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { handleSetAuthedUser } from '../actions/authedUser'
 import { Redirect } from 'react-router-dom'
@@ -6,6 +7,10 @@ import { Redirect } from 'react-router-dom'
 class Login extends Component {
   state = {
     userId: ''
+  }
+
+  componentDidMount () {
+      this.props.history.go(-(this.props.history.length - 1))
   }
 
   handleChange = (e) => {
@@ -76,4 +81,4 @@ function mapStateToProps ({ users }) {
   }
 }
 
-export default connect(mapStateToProps)(Login)
+export default withRouter(connect(mapStateToProps)(Login))

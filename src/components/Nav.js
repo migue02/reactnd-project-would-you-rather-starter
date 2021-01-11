@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { handleSetAuthedUser } from '../actions/authedUser'
 
 class Nav extends Component {
 
-    toLogin = (e) => {
-        e.preventDefault()
-
+    toLogin = () => {
         const { dispatch } = this.props
 
         dispatch(handleSetAuthedUser(null))
@@ -17,8 +15,6 @@ class Nav extends Component {
         const { authedUser } = this.props
         const isLogged = authedUser !== null
 
-        console.log('authedUser', authedUser);
-
         return (
             <nav className='nav'>
                 <ul>
@@ -27,7 +23,7 @@ class Nav extends Component {
                         Home
                         </NavLink>
                     </li>
-                    <li>
+                    <li className={isLogged ? '' : 'disabled'}>
                         <NavLink to='/new' activeClassName='active'>
                         New Question
                         </NavLink>
@@ -50,9 +46,9 @@ class Nav extends Component {
                                 />
                             </li>
                             <li>
-                                <Link to='/' onClick={this.toLogin}>
+                                <NavLink to='/' activeClassName='active' onClick={this.toLogin}>
                                 Logout
-                                </Link>
+                                </NavLink>
                             </li>
                         </ul>
                         : null
