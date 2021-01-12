@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleQuestionsData } from '../actions/shared'
 import UserScore from './UserScore'
+import { Redirect } from 'react-router-dom'
 
 class LeaderBoard extends Component {
   state = {
@@ -21,7 +22,11 @@ class LeaderBoard extends Component {
   }
 
   render() {
-    const { leaderBoardUsers } = this.props
+    const { leaderBoardUsers, authedUser } = this.props
+
+    if (!authedUser) {
+      return <Redirect to='/' />
+    }
 
     return (
       <div className='center'>
@@ -35,7 +40,7 @@ class LeaderBoard extends Component {
   }
 }
 
-function mapStateToProps ({ users }) {
+function mapStateToProps ({ users, authedUser }) {
   const leaderBoardUsers = Object.keys(users)
     .map(id => {
       const user = users[id]
@@ -52,7 +57,8 @@ function mapStateToProps ({ users }) {
     .sort((a,b) => b.score - a.score)
 
   return {
-    leaderBoardUsers
+    leaderBoardUsers,
+    authedUser
   }
 }
 

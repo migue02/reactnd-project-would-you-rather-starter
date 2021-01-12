@@ -13,7 +13,6 @@ class Nav extends Component {
 
     render() {
         const { authedUser } = this.props
-        const isLogged = authedUser !== null
 
         return (
             <nav className='nav'>
@@ -23,8 +22,8 @@ class Nav extends Component {
                         Home
                         </NavLink>
                     </li>
-                    <li className={isLogged ? '' : 'disabled'}>
-                        <NavLink to='/new' activeClassName='active'>
+                    <li>
+                        <NavLink to='/add' activeClassName='active'>
                         New Question
                         </NavLink>
                     </li>
@@ -34,25 +33,21 @@ class Nav extends Component {
                         </NavLink>
                     </li>
                 </ul>
-                    {isLogged
-                        ?
-                        <ul className='user-nav'>
-                            <li>
-                                <span>Hello, {authedUser.name}</span>
-                                <img
-                                    src={authedUser.avatarURL}
-                                    alt={`Avatar of ${authedUser.name}`}
-                                    className='avatar'
-                                />
-                            </li>
-                            <li>
-                                <NavLink to='/' activeClassName='active' onClick={this.toLogin}>
-                                Logout
-                                </NavLink>
-                            </li>
-                        </ul>
-                        : null
-                    }
+                <ul className='user-nav'>
+                    <li>
+                        <span>Hello, {authedUser.name}</span>
+                        <img
+                            src={authedUser.avatarURL}
+                            alt={`Avatar of ${authedUser.name}`}
+                            className='avatar'
+                        />
+                    </li>
+                    <li>
+                        <NavLink to='/' activeClassName='active' onClick={this.toLogin}>
+                        Logout
+                        </NavLink>
+                    </li>
+                </ul>
             </nav>
         )
     }

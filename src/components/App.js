@@ -23,7 +23,7 @@ class App extends Component {
         <Fragment>
           <LoadingBar />
           <div className='container'>
-            <Nav />
+            {isLogged ? <Nav /> : null}
             {loading === true
               ? null
               : <div>
@@ -32,7 +32,7 @@ class App extends Component {
                     : <Route path='/' exact component={Login} />
                   }
                   <Route path='/questions/:id' exact component={QuestionResult} />
-                  <Route path='/new' exact component={NewQuestion} />
+                  <Route path='/add' exact component={NewQuestion} />
                   <Route path='/leaderboard' exact component={LeaderBoard} />
                 </div>
             }

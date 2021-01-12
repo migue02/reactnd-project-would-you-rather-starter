@@ -47,7 +47,7 @@ class Login extends Component {
     const { userId } = this.state
 
     return (
-      <div className='center'>
+      <div className='center middle-screen'>
         <h3>Login</h3>
         <form className='login-form' onSubmit={this.handleSubmit}>
           <div className='select'>
