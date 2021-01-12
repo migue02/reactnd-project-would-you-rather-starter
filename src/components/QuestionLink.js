@@ -19,7 +19,7 @@ class QuestionLink extends Component {
     } = question
 
     return (
-      <Link to={`/questions/${id}`} className='question'>
+      <Link to={`/questions/${id}`} className='question section'>
         <div className='user-info'>
           <img
             src={author.avatarURL}

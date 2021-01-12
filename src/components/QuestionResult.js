@@ -15,7 +15,7 @@ class QuestionResult extends Component {
     }
 
     return (
-        <div className='result'>
+        <div className='section'>
           <span className='result-author'>Asked by {user.name}</span>
           <div className='result-info'>
             <div className='user-info'>

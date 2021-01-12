@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleSaveQuestionAnswer } from '../actions/questions'
-import { Redirect } from 'react-router-dom'
 
 class SubmitVote extends Component {
   state = {
@@ -27,17 +26,12 @@ class SubmitVote extends Component {
 
     this.setState(() => ({
       option: '',
-      toHome: true,
     }))
   }
 
   render() {
     const { question } = this.props
-    const { option, toHome } = this.state
-
-    if (toHome) {
-      return <Redirect to='/' />
-    }
+    const { option } = this.state
 
     const {
       optionOne, optionTwo

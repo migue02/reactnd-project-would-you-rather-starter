@@ -1,18 +1,7 @@
-.result {
-    width: 100%;
-    max-width: 590px;
-    display: flex;
-    margin: 0 auto;
-    border: 1px solid #dad7d7;
-    border-radius: 3px;
-    flex-direction: column;
-    padding: 0;
-}
-
-.result>.result-author {
+.result-author {
     padding: 20px;
     font-weight: bold;
-    background-color: rgb(214, 209, 209);
+    background-color: rgb(216, 216, 216);
 }
 
 .result-info {

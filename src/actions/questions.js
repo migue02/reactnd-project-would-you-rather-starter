@@ -1,9 +1,10 @@
-import { saveQuestionAnswer } from '../utils/api'
+import { saveQuestion, saveQuestionAnswer } from '../utils/api'
 import { showLoading, hideLoading } from 'react-redux-loading'
 import { addUserAnswer } from './users'
 
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
 export const ADD_QUESTION_ANSWER = 'ADD_QUESTION_ANSWER'
+export const ADD_QUESTION = 'ADD_QUESTION'
 
 export function receiveQuestions (questions) {
     return {
@@ -19,6 +20,13 @@ function addQuestionAnswer (vote) {
     }
 }
 
+function addQuestion (question) {
+    return {
+        type: ADD_QUESTION,
+        question
+    }
+}
+
 export function handleSaveQuestionAnswer (qid, answer) {
     showLoading()
     return (dispatch, getState) => {
@@ -31,6 +39,22 @@ export function handleSaveQuestionAnswer (qid, answer) {
         return saveQuestionAnswer(vote)
         .then(() => dispatch(addQuestionAnswer(vote)))
         .then(() => dispatch(addUserAnswer(vote)))
+        .then(() => dispatch(hideLoading()))
+    }
+}
+
+export function handleAddQuestion ({ optionOne, optionTwo }) {
+    showLoading()
+    return (dispatch, getState) => {
+        const { authedUser } = getState()
+        const question = {
+            optionOneText: optionOne,
+            optionTwoText: optionTwo,
+            author: authedUser
+        }
+
+        return saveQuestion(question)
+        .then((question) => dispatch(addQuestion(question)))
         .then(() => dispatch(hideLoading()))
     }
 }

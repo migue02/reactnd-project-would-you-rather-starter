@@ -7,6 +7,7 @@ import Login from './Login'
 import Nav from './Nav'
 import Dashboard from './Dashboard'
 import QuestionResult from './QuestionResult'
+import NewQuestion from './NewQuestion'
 
 class App extends Component {
   componentDidMount() {
@@ -30,6 +31,7 @@ class App extends Component {
                     : <Route path='/' exact component={Login} />
                   }
                   <Route path='/questions/:id' exact component={QuestionResult} />
+                  <Route path='/new' exact component={NewQuestion} />
                 </div>
             }
           </div>
