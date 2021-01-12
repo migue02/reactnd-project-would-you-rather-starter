@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleQuestionsData } from '../actions/shared'
-import Question from './Question'
+import QuestionLink from './QuestionLink'
 
 class Dashboard extends Component {
   state = {
@@ -41,7 +41,7 @@ class Dashboard extends Component {
         </div>
         {questions.map((question) => (
           <li key={question.id}>
-            <Question id={question.id} ></Question>
+            <QuestionLink id={question.id} />
           </li>
         ))}
       </div>

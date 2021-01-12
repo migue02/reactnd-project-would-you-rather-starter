@@ -1,24 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { isVoted } from '../utils/helpers'
-import Answer from './Answer'
-
+import Options from './Options'
+import SubmitVote from './SubmitVote'
+import { Redirect } from 'react-router-dom'
 class QuestionResult extends Component {
 
   percentage = (votes, total) => (votes * 100)/total
 
   render() {
-    const { question, user, authedUser } = this.props
+    const { question, user, isAnswered } = this.props
 
-    if (question === null) {
-      return <p>This question doesn't exist</p>
+    if (!question) {
+      return <Redirect to='/' />
     }
-
-    const {
-      optionOne, optionTwo
-    } = question
-
-    const totalVotes = optionOne.votes.length + optionTwo.votes.length
 
     return (
         <div className='result'>
@@ -31,11 +25,7 @@ class QuestionResult extends Component {
                 className='question-user-avatar'
               />
             </div>
-            <div className='answer-info'>
-              <span>Results</span>
-              <Answer option={optionOne} totalVotes={totalVotes} voted={isVoted(optionOne, authedUser)} />
-              <Answer option={optionTwo} totalVotes={totalVotes} voted={isVoted(optionTwo, authedUser)} />
-            </div>
+            {isAnswered ? <Options question={question}/> : <SubmitVote question={question}/>}
           </div>
         </div>
     )
@@ -46,10 +36,13 @@ function mapStateToProps ({ authedUser, users, questions }, props) {
   const { id } = props.match.params
   const question = questions[id]
 
+  if (!question) {
+    return {}
+  }
+
   return {
     question,
     user: users[question.author],
-    authedUser,
     isAnswered: Object.keys(users[authedUser].answers).includes(question.id)
   }
 }

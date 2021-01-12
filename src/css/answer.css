@@ -1,0 +1,24 @@
+.answer-info>span {
+    padding: 10px;
+}
+
+.answer-form {
+    width: 100%;
+}
+
+.answer-form>.btn {
+    display: block;
+}
+
+.answer-options {
+    display: flex;
+    flex-direction: column;
+}
+
+.answer-options>div {
+    padding: 10px;
+}
+
+.label-option {
+    margin-left: 10px;
+}

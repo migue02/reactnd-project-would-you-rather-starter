@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { FcApproval } from "react-icons/fc"
 import { MdCancel } from "react-icons/md"
 
-class Answer extends Component {
+class Option extends Component {
 
   percentage = (votes, total) => (votes * 100)/total
 
@@ -27,4 +27,4 @@ class Answer extends Component {
   }
 }
 
-export default Answer
+export default Option

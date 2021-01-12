@@ -1,56 +1,56 @@
 import React, { Component } from 'react'
-import { formatDate } from '../utils/helpers'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { isVoted } from '../utils/helpers'
+import Option from './Option'
 
 class Question extends Component {
 
-  truncate = (input) => input.length > 15 ? `...${input.substring(0, 15)}...` : input;
+  percentage = (votes, total) => (votes * 100)/total
 
   render() {
-    const { question, author } = this.props
+    const { question, user, authedUser } = this.props
 
     if (question === null) {
       return <p>This question doesn't exist</p>
     }
 
     const {
-      timestamp, id, optionOne, optionTwo
+      optionOne, optionTwo
     } = question
 
+    const totalVotes = optionOne.votes.length + optionTwo.votes.length
+
     return (
-      <Link to={`/questions/${id}`} className='question'>
-        <div className='user-info'>
-          <img
-            src={author.avatarURL}
-            alt={`Avatar of ${author.name}`}
-            className='question-user-avatar'
-          />
-          <span className='question-user-name'>{author.name}</span>
-        </div>
-        <div className='question-info'>
-          <div>
-            <div className='question-responses'>
-              <span>Would you rather...</span>
-              <span>{this.truncate(optionOne.text)}</span>
-              <span>{this.truncate(optionTwo.text)}</span>
+        <div className='result'>
+          <span className='result-author'>Asked by {user.name}</span>
+          <div className='result-info'>
+            <div className='user-info'>
+              <img
+                src={user.avatarURL}
+                alt={`Avatar of ${user.name}`}
+                className='question-user-avatar'
+              />
             </div>
-            <span className='question-date'>{formatDate(timestamp)}</span>
+            <div className='answer-info'>
+              <span>Results</span>
+              <Option option={optionOne} totalVotes={totalVotes} voted={isVoted(optionOne, authedUser)} />
+              <Option option={optionTwo} totalVotes={totalVotes} voted={isVoted(optionTwo, authedUser)} />
+            </div>
           </div>
-          <button>View poll</button>
         </div>
-      </Link>
     )
   }
 }
 
-function mapStateToProps ({ authedUser, users, questions }, { id }) {
+function mapStateToProps ({ authedUser, users, questions }, props) {
+  const { id } = props.match.params
   const question = questions[id]
 
   return {
-    authedUser,
     question,
-    author: users[question.author]
+    user: users[question.author],
+    authedUser,
+    isAnswered: Object.keys(users[authedUser].answers).includes(question.id)
   }
 }
 

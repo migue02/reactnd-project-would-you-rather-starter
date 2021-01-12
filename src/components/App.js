@@ -41,7 +41,7 @@ class App extends Component {
 
 function mapStateToProps ({ users, authedUser }) {
   return {
-    loading: users === {},
+    loading: !users || !Object.keys(users).length,
     isLogged: authedUser !== null
   }
 }
