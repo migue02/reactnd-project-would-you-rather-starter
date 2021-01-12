@@ -117,6 +117,13 @@ li span {
   padding: 0;
 }
 
+.error-icon {
+  width: 80px;
+  height: 80px;
+  display: block;
+  align-self: center;
+}
+
 @import url('./css/new-question.css');
 @import url('./css/tabs.css');
 @import url('./css/login.css');

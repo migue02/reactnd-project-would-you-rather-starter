@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleQuestionsData } from '../actions/shared'
 import UserScore from './UserScore'
-import { Redirect } from 'react-router-dom'
+import Login from './Login'
 
 class LeaderBoard extends Component {
   state = {
@@ -22,10 +22,10 @@ class LeaderBoard extends Component {
   }
 
   render() {
-    const { leaderBoardUsers, authedUser } = this.props
+    const { leaderBoardUsers, authedUser, history } = this.props
 
     if (!authedUser) {
-      return <Redirect to='/' />
+      return <Login />
     }
 
     return (

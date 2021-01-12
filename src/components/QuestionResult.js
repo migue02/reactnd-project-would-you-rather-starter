@@ -3,15 +3,20 @@ import { connect } from 'react-redux'
 import Options from './Options'
 import SubmitVote from './SubmitVote'
 import { Redirect } from 'react-router-dom'
+import Login from './Login'
 class QuestionResult extends Component {
 
   percentage = (votes, total) => (votes * 100)/total
 
   render() {
-    const { question, user, isAnswered } = this.props
+    const { question, user, isAnswered, authedUser } = this.props
+
+    if (!authedUser) {
+      return <Login />
+    }
 
     if (!question) {
-      return <Redirect to='/' />
+      return <Redirect to='/error' />
     }
 
     return (
@@ -37,13 +42,16 @@ function mapStateToProps ({ authedUser, users, questions }, props) {
   const question = questions[id]
 
   if (!question) {
-    return {}
+    return {
+      authedUser
+    }
   }
 
   return {
     question,
     user: users[question.author],
-    isAnswered: Object.keys(users[authedUser].answers).includes(question.id)
+    isAnswered: authedUser && Object.keys(users[authedUser].answers).includes(question.id),
+    authedUser
   }
 }
 

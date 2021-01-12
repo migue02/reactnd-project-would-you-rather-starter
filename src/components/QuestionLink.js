@@ -10,10 +10,6 @@ class QuestionLink extends Component {
   render() {
     const { question, author } = this.props
 
-    if (question === null) {
-      return <p>This question doesn't exist</p>
-    }
-
     const {
       timestamp, id, optionOne, optionTwo
     } = question

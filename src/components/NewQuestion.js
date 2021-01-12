@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import serializeForm from 'form-serialize'
 import { handleAddQuestion } from '../actions/questions'
+import Login from './Login'
 
 class NewQuestion extends Component {
   state = {
@@ -46,8 +47,12 @@ class NewQuestion extends Component {
     const { authedUser } = this.props
 
 
-    if (toHome || !authedUser) {
+    if (toHome) {
       return <Redirect to='/' />
+    }
+
+    if (!authedUser) {
+      return <Login />
     }
 
     return (

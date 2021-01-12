@@ -9,6 +9,7 @@ import Dashboard from './Dashboard'
 import QuestionResult from './QuestionResult'
 import NewQuestion from './NewQuestion'
 import LeaderBoard from './LeaderBoard'
+import Error from './Error'
 
 class App extends Component {
   componentDidMount() {
@@ -34,6 +35,7 @@ class App extends Component {
                   <Route path='/questions/:id' exact component={QuestionResult} />
                   <Route path='/add' exact component={NewQuestion} />
                   <Route path='/leaderboard' exact component={LeaderBoard} />
+                  <Route path='/error' exact component={Error} />
                 </div>
             }
           </div>
