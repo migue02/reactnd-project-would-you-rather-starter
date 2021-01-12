@@ -24,7 +24,7 @@ class QuestionLink extends Component {
           <img
             src={author.avatarURL}
             alt={`Avatar of ${author.name}`}
-            className='question-user-avatar'
+            className='user-avatar'
           />
           <span className='question-user-name'>{author.name}</span>
         </div>

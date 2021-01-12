@@ -22,7 +22,7 @@ class QuestionResult extends Component {
               <img
                 src={user.avatarURL}
                 alt={`Avatar of ${user.name}`}
-                className='question-user-avatar'
+                className='user-avatar'
               />
             </div>
             {isAnswered ? <Options question={question}/> : <SubmitVote question={question}/>}

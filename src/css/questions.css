@@ -4,21 +4,6 @@
     cursor: pointer;
 }
 
-.user-info {
-    display: flex;
-    flex-direction: column;
-    width: 25%;
-    align-items: center;
-    justify-content: center;
-}
-
-.question-user-avatar {
-    display: flex;
-    max-width: 90px;
-    width: auto;
-    height: auto;
-}
-
 .question-user-name {
     display: flex;
 }

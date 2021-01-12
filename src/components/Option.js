@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { FcApproval } from "react-icons/fc"
-import { MdCancel } from "react-icons/md"
+import { FcApproval } from 'react-icons/fc'
+import { MdCancel } from 'react-icons/md'
 
 class Option extends Component {
 
