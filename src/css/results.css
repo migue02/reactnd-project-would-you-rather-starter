@@ -61,9 +61,9 @@
     margin-left: -25px;
 }
 
-.percentage {
+.percentage-bar {
     border: rgb(77, 77, 77) 1px solid;
-    background: rgb(231, 231, 231);
+    background: rgb(221, 221, 221);
     border-radius: 13px;
     height: 30px;
 	width: 70%;
@@ -79,6 +79,14 @@
     border-radius: 9px;
 }
 
-.voted>.percentage>.fill {
-    background-color: rgb(66, 165, 79);
+.voted>.percentage-bar>.fill {
+    background-color: rgb(100, 201, 114);
+}
+
+.percentage {
+	display: block;
+	text-align: center;
+	margin-top: -30px;
+    line-height: 30px;
+    font-weight: bold;
 }
